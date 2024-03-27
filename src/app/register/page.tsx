@@ -1,16 +1,19 @@
 "use client";
 
+import {registerUser} from "@/utils/actions/registerUser";
 import Image from "next/image";
 import Link from "next/link";
+import {useRouter} from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export type UserData = {
-  username: string;
+  name: string;
   email: string;
   password: string;
 };
 
 const RegisterPage = () => {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -18,9 +21,12 @@ const RegisterPage = () => {
   } = useForm<UserData>();
 
   const onSubmit = async (data: UserData) => {
-    console.log(data);
 
     try {
+      const res = await registerUser(data)
+      if(res.success){
+        router.push('/login')
+      }
     } catch (err: any) {
       console.error(err.message);
       throw new Error(err.message);
@@ -51,7 +57,7 @@ const RegisterPage = () => {
               </label>
               <input
                 type="text"
-                {...register("username")}
+                {...register("name")}
                 placeholder="User Name"
                 className="input input-bordered"
                 required
