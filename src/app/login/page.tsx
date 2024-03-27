@@ -78,7 +78,11 @@ const LoginPage = () => {
           </form>
           <p className="text-center">Or Sign Up Using</p>
           <div className="flex justify-center mb-10 mt-2">
-            <button className="btn btn-circle ">
+            <button
+            onClick={() => signIn("google", {
+              callbackUrl: 'http://localhost:3000/dashboard'
+            })} 
+            className="btn btn-circle ">
               <Image
                 src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
                 width={50}
@@ -86,9 +90,11 @@ const LoginPage = () => {
                 alt="google logo"
               />
             </button>
-            <button onClick={() => signIn("github", {
+            <button 
+            onClick={() => signIn("github", {
               callbackUrl: 'http://localhost:3000/dashboard'
-            })} className="btn btn-circle">
+            })} 
+            className="btn btn-circle">
               <Image
                 src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
                 width={35}
